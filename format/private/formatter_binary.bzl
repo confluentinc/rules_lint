@@ -40,7 +40,7 @@ BUILTIN_TOOL_LABELS = {
 
 # Flags to pass each tool's CLI when running in check mode
 CHECK_FLAGS = {
-    "buildifier": "-mode=check -lint=warn",
+    "buildifier": "-mode=check",
     "swiftformat": "--lint",
     "prettier": "--check",
     "ruff": "format --check --force-exclude --diff",
@@ -59,7 +59,7 @@ CHECK_FLAGS = {
 
 # Flags to pass each tool when running in default mode
 FIX_FLAGS = {
-    "buildifier": "-mode=fix -lint=fix",
+    "buildifier": "-mode=fix",
     "swiftformat": "",
     "prettier": "--write",
     # Force exclusions in the configuration file to be honored even when file paths are supplied
