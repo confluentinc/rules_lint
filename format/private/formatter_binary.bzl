@@ -14,7 +14,7 @@ TOOLS = {
     "Jsonnet": "jsonnetfmt",
     "Terraform": "terraform-fmt",
     "Kotlin": "ktfmt",
-    "Java": "java-format",
+    "Java": "prettier",
     "Scala": "scalafmt",
     "Swift": "swiftformat",
     "Go": "gofmt",
