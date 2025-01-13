@@ -194,9 +194,9 @@ http_archive(
 
 http_archive(
     name = "toolchains_protoc",
-    sha256 = "117af61ee2f1b9b014dcac7c9146f374875551abb8a30e51d1b3c5946d25b142",
-    strip_prefix = "toolchains_protoc-0.3.0",
-    url = "https://github.com/aspect-build/toolchains_protoc/releases/download/v0.3.0/toolchains_protoc-v0.3.0.tar.gz",
+    sha256 = "abb1540f8a9e045422730670ebb2f25b41fa56ca5a7cf795175a110a0a68f4ad",
+    strip_prefix = "toolchains_protoc-0.3.6",
+    url = "https://github.com/aspect-build/toolchains_protoc/releases/download/v0.3.6/toolchains_protoc-v0.3.6.tar.gz",
 )
 
 load("@toolchains_protoc//protoc:toolchain.bzl", "protoc_toolchains")
