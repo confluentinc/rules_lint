@@ -33,9 +33,9 @@ def rules_lint_dependencies():
     # Note that many WORKSPACE users will get an earlier (and incompatible) version from some other *_dependencies() helper
     http_archive(
         name = "bazel_features",
-        sha256 = "06f02b97b6badb3227df2141a4b4622272cdcd2951526f40a888ab5f43897f14",
-        strip_prefix = "bazel_features-1.9.0",
-        url = "https://github.com/bazel-contrib/bazel_features/releases/download/v1.9.0/bazel_features-v1.9.0.tar.gz",
+        sha256 = "8b1c9b7558498000f5adebbc584b7bf15b6b2bf181448a66f6b2fc5b4c84231c",
+        strip_prefix = "bazel_features-1.23.0",
+        url = "https://github.com/bazel-contrib/bazel_features/releases/download/v1.23.0/bazel_features-v1.23.0.tar.gz",
     )
 
 def fetch_java_format():
