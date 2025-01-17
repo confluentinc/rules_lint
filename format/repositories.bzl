@@ -70,6 +70,6 @@ def fetch_swiftformat():
             "if command -v xattr > /dev/null; then xattr -c swiftformat; fi",
             "chmod u+x swiftformat",
         ],
-        sha256 = "978eaffdc3716bbc0859aecee0d83875cf3ab8d8725779448f0035309d9ad9f3",
-        url = "https://github.com/nicklockwood/SwiftFormat/releases/download/0.49.17/swiftformat.zip",
+        sha256 = "c252ba7109b247ad4e172a7a20ced02f0f9132ffdf379ca1cd8e360272950836",
+        url = "https://github.com/nicklockwood/SwiftFormat/releases/download/0.55.4/swiftformat.zip",
     )
