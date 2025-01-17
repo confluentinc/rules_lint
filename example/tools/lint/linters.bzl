@@ -53,6 +53,10 @@ pmd_test = lint_test(aspect = pmd)
 checkstyle = lint_checkstyle_aspect(
     binary = "@@//tools/lint:checkstyle",
     config = "@@//:checkstyle.xml",
+    configs = {
+        "@@//src/cpp/lib": "@@//:checkstyle_default.xml",
+        "@@//src/cpp": "@@//:checkstyle.xml",
+    },
     data = ["@@//:checkstyle-suppressions.xml"],
 )
 

@@ -16,3 +16,8 @@ cc_library(
     includes = ["."],
     visibility = ["//src/cpp/main:__pkg__"],
 )
+
+java_library(
+    name = "foo",
+    srcs = ["Foo.java"],
+)
