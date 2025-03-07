@@ -10,10 +10,14 @@
 // H D DLS: Dead store to $L1 in Foo.readFile()  At Foo.java:[line 18]
 // M X OBL: Foo.readFile() may fail to clean up java.io.InputStream  Obligation to clean up resource
 // created at Foo.java:[line 18] is not discharged
+
+package src;
+
 public class Foo {
 
   // SpotBugs violation: Logical errors (NP_NULL_ON_SOME_PATH + DLS_DEAD_STORE)
   public void someMethod(String str) {
+    Bar bar = new Bar();
     if (str.equals("test")) { // Possible NPE if str is null
       System.out.println("Valid string");
     }

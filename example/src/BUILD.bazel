@@ -69,6 +69,7 @@ py_library(
 java_library(
     name = "foo",
     srcs = ["Foo.java"],
+    deps = [":bar"],
 )
 
 java_library(

@@ -62,6 +62,9 @@ def spotbugs_action(ctx, executable, srcs, exclude_filter, stdout, exit_code = N
     src_args.add_all(srcs)
     args.add_all(["-exclude", exclude_filter.path])
 
+    print("Args %s", args)
+    print("Src Args %s", src_args)
+
     if exit_code:
         command = "{SPOTBUGS} $@ >{stdout}; echo $? > " + exit_code.path
         outputs.append(exit_code)
@@ -83,17 +86,23 @@ def _spotbugs_aspect_impl(target, ctx):
     if not should_visit(ctx.rule, ctx.attr._rule_kinds):
         return []
 
-    print("Print target %s", target.label)
-    print("JavaInfo %s", target[JavaInfo])
-    print("OutputGroupInfo %s", target[OutputGroupInfo])
+    #    print("Print target %s", target.label)
+    #    print("JavaInfo %s", target[JavaInfo])
+    #    print("OutputGroupInfo %s", target[OutputGroupInfo])
 
     files_to_lint = [jar.class_jar for jar in target[JavaInfo].outputs.jars]
     print("Files to lint %s", files_to_lint)
+
+    classpath = [jar.path for jar in target[JavaInfo].transitive_runtime_jars.to_list()]
+    print("Classpath %s", classpath)
+    format_options = []
+    classpath = ":".join(classpath)
+    format_options.extend(["-auxclasspath", classpath])
+
     outputs, info = output_files(_MNEMONIC, target, ctx)
     if len(files_to_lint) == 0:
         noop_lint_action(ctx, outputs)
         return [info]
-    format_options = []  # to define
     spotbugs_action(ctx, ctx.executable._spotbugs, files_to_lint, ctx.file._exclude_filter, outputs.human.out, outputs.human.exit_code, format_options)
     spotbugs_action(ctx, ctx.executable._spotbugs, files_to_lint, ctx.file._exclude_filter, outputs.machine.out, outputs.machine.exit_code, format_options)
     return [info]
