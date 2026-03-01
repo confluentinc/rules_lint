@@ -17,36 +17,46 @@ Features:
   No need to create `sh_library` targets for your shell scripts, for example.
 - Honors the same **configuration files** you use for these tools outside Bazel (e.g. in the editor)
 
+**Watch Alex's talk at BazelCon 2024:**
+
+[![rules_lint at BazelCon](https://img.youtube.com/vi/CnK-RAdfrpI/0.jpg)](https://www.youtube.com/watch?v=CnK-RAdfrpI)
+
 ## Supported tools
 
 New tools are being added frequently, so check this page again!
 
-| Language               | Formatter             | Linter(s)                        |
-| ---------------------- | --------------------- |----------------------------------|
-| C / C++                | [clang-format]        | [clang-tidy]                     |
-| Cuda                   | [clang-format]        |                                  |
-| CSS, Less, Sass        | [Prettier]            | [Stylelint]                      |
-| Go                     | [gofmt] or [gofumpt]  |                                  |
-| GraphQL                | [Prettier]            |                                  |
-| HCL (Hashicorp Config) | [terraform] fmt       |                                  |
-| HTML                   | [Prettier]            |                                  |
-| JSON                   | [Prettier]            |                                  |
-| Java                   | [google-java-format]  | [pmd] , [Checkstyle], [Spotbugs] |
-| JavaScript             | [Prettier]            | [ESLint]                         |
-| Jsonnet                | [jsonnetfmt]          |                                  |
-| Kotlin                 | [ktfmt]               | [ktlint]                         |
-| Markdown               | [Prettier]            | [Vale]                           |
-| Protocol Buffer        | [buf]                 | [buf lint]                       |
-| Python                 | [ruff]                | [flake8], [ruff]                 |
-| Rust                   | [rustfmt]             |                                  |
-| SQL                    | [prettier-plugin-sql] |                                  |
-| Scala                  | [scalafmt]            |                                  |
-| Shell                  | [shfmt]               | [shellcheck]                     |
-| Starlark               | [Buildifier]          |                                  |
-| Swift                  | [SwiftFormat] (1)     |                                  |
-| TSX                    | [Prettier]            | [ESLint]                         |
-| TypeScript             | [Prettier]            | [ESLint]                         |
-| YAML                   | [yamlfmt]             |                                  |
+Linters which are not language-specific:
+
+- [keep-sorted]
+
+| Language               | Formatter                 | Linter(s)                        |
+| ---------------------- | ------------------------- | -------------------------------- |
+| C / C++                | [clang-format]            | [clang-tidy]                     |
+| Cuda                   | [clang-format]            |                                  |
+| CSS, Less, Sass        | [Prettier]                | [Stylelint]                      |
+| Go                     | [gofmt] or [gofumpt]      |                                  |
+| Gherkin                | [prettier-plugin-gherkin] |                                  |
+| GraphQL                | [Prettier]                |                                  |
+| HCL (Hashicorp Config) | [terraform] fmt           |                                  |
+| HTML                   | [Prettier]                |                                  |
+| JSON                   | [Prettier]                |                                  |
+| Java                   | [google-java-format]      | [pmd] , [Checkstyle], [Spotbugs] |
+| JavaScript             | [Prettier]                | [ESLint]                         |
+| Jsonnet                | [jsonnetfmt]              |                                  |
+| Kotlin                 | [ktfmt]                   | [ktlint]                         |
+| Markdown               | [Prettier]                | [Vale]                           |
+| Protocol Buffer        | [buf]                     | [buf lint]                       |
+| Python                 | [ruff]                    | [flake8], [ruff]                 |
+| Rust                   | [rustfmt]                 |                                  |
+| SQL                    | [prettier-plugin-sql]     |                                  |
+| Scala                  | [scalafmt]                |                                  |
+| Shell                  | [shfmt]                   | [shellcheck]                     |
+| Starlark               | [Buildifier]              |                                  |
+| Swift                  | [SwiftFormat] (1)         |                                  |
+| TSX                    | [Prettier]                | [ESLint]                         |
+| TypeScript             | [Prettier]                | [ESLint]                         |
+| YAML                   | [yamlfmt]                 |                                  |
+| XML                    | [prettier/plugin-xml]     |                                  |
 
 [prettier]: https://prettier.io
 [google-java-format]: https://github.com/google/google-java-format
@@ -59,10 +69,13 @@ New tools are being added frequently, so check this page again!
 [swiftformat]: https://github.com/nicklockwood/SwiftFormat
 [terraform]: https://github.com/hashicorp/terraform
 [buf]: https://docs.buf.build/format/usage
+[keep-sorted]: https://github.com/google/keep-sorted
 [ktfmt]: https://github.com/facebook/ktfmt
 [ktlint]: https://github.com/pinterest/ktlint
 [buildifier]: https://github.com/keith/buildifier-prebuilt
 [prettier-plugin-sql]: https://github.com/un-ts/prettier
+[prettier-plugin-gherkin]: https://github.com/mapado/prettier-plugin-gherkin
+[prettier/plugin-xml]: https://github.com/prettier/plugin-xml
 [gofmt]: https://pkg.go.dev/cmd/gofmt
 [gofumpt]: https://github.com/mvdan/gofumpt
 [jsonnetfmt]: https://github.com/google/go-jsonnet

@@ -8,6 +8,13 @@ on:
       tag_name:
         required: true
         type: string
+  # In case of problems, let release engineers retry by manually dispatching
+  # the workflow from the GitHub UI
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        required: true
+        type: string
   # Or, developers can manually push a tag from their clone
   push:
     tags:
@@ -15,8 +22,17 @@ on:
 
 jobs:
   release:
-    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@c9d6d1893b10a8d68584a6ba52c3dd35506486d0 # 2024-12-03
+    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@540bb73a286db90d2f82d337d0adec21d3d54d7b # 2025-03-14
     with:
       prerelease: false
       release_files: rules_lint-*.tar.gz
+      tag_name: ${{ inputs.tag_name }}
+    permissions:
+      id-token: write # Needed to attest provenance
+      attestations: write # Needed to attest provenance
+  publish:
+    name: Publish to BCR
+    needs: release
+    uses: ./.github/workflows/publish.yaml
+    with:
       tag_name: ${{ inputs.tag_name }}

@@ -42,6 +42,9 @@ load("@bazel_tools//tools/cpp:toolchain_utils.bzl", "find_cpp_toolchain")
 load("//lint/private:lint_aspect.bzl", "LintOptionsInfo", "noop_lint_action", "output_files", "patch_and_output_files")
 
 _MNEMONIC = "AspectRulesLintClangTidy"
+_DISABLED_FEATURES = [
+    "layering_check",
+]
 
 def _gather_inputs(ctx, compilation_context, srcs):
     inputs = srcs + ctx.files._configs
@@ -55,7 +58,7 @@ def _toolchain_env(ctx, user_flags, action_name = ACTION_NAMES.cpp_compile):
         ctx = ctx,
         cc_toolchain = cc_toolchain,
         requested_features = ctx.features,
-        unsupported_features = ctx.disabled_features,
+        unsupported_features = ctx.disabled_features + _DISABLED_FEATURES,
     )
     compile_variables = cc_common.create_compile_variables(
         feature_configuration = feature_configuration,
@@ -76,7 +79,7 @@ def _toolchain_flags(ctx, user_flags, action_name = ACTION_NAMES.cpp_compile):
         ctx = ctx,
         cc_toolchain = cc_toolchain,
         requested_features = ctx.features,
-        unsupported_features = ctx.disabled_features,
+        unsupported_features = ctx.disabled_features + _DISABLED_FEATURES,
     )
     compile_variables = cc_common.create_compile_variables(
         feature_configuration = feature_configuration,
@@ -178,6 +181,9 @@ def _is_source(file):
 
 # modification of filter_srcs in lint_aspect.bzl that filters out header files
 def _filter_srcs(rule):
+    # some rules can return a CcInfo without having a srcs attribute
+    if not hasattr(rule.attr, "srcs"):
+        return []
     if "lint-genfiles" in rule.attr.tags:
         return rule.files.srcs
     else:
@@ -270,6 +276,12 @@ def _get_compiler_args(ctx, compilation_context, srcs):
         args.append("-D" + define)
     for define in compilation_context.local_defines.to_list():
         args.append("-D" + define)
+    if hasattr(ctx.rule.attr, "defines"):
+        for define in ctx.rule.attr.defines:
+            args.append("-D" + define)
+    if hasattr(ctx.rule.attr, "local_defines"):
+        for define in ctx.rule.attr.local_defines:
+            args.append("-D" + define)
 
     # add includes
     args.extend(_prefixed(compilation_context.framework_includes.to_list(), "-F"))

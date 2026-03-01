@@ -40,6 +40,13 @@ bats_load_library "bats-assert"
     assert_output --partial "+ prettier --write .bcr/README.md CONTRIBUTING.md README.md"
 }
 
+@test "should run prettier on XML" {
+    run bazel run //format/test:format_XML_with_prettier
+    assert_success
+
+    assert_output --partial "+ prettier --write example/checkstyle-suppressions.xml"
+}
+
 @test "should run prettier on CSS" {
     run bazel run //format/test:format_CSS_with_prettier
     assert_success
@@ -95,7 +102,7 @@ bats_load_library "bats-assert"
     run bazel run //format/test:format_Java_with_java-format
     assert_success
 
-    assert_output --partial "+ java-format --replace example/src/Bar.java example/src/Foo.java"
+    assert_output --partial "+ java-format --replace example/src/Bar.java example/src/FileReaderUtil.java example/src/Foo.java"
 }
 
 @test "should run ktfmt on Kotlin" {
@@ -168,4 +175,11 @@ bats_load_library "bats-assert"
     assert_success
 
     assert_output --partial "+ rustfmt example/src/hello.rs"
+}
+
+@test "should run prettier on Gherkin" {
+    run bazel run //format/test:format_Gherkin_with_prettier
+    assert_success
+
+    assert_output --partial "+ prettier --write example/src/hello.feature"
 }

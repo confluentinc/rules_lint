@@ -40,6 +40,7 @@ format_multirun(
     css = ":mock_prettier.sh",
     cuda = ":mock_clang-format.sh",
     go = ":mock_gofmt.sh",
+    gherkin = ":mock_prettier.sh",
     graphql = ":mock_prettier.sh",
     html = ":mock_prettier.sh",
     java = ":mock_java-format.sh",
@@ -57,5 +58,6 @@ format_multirun(
     swift = ":mock_swiftformat.sh",
     # TODO: this attribute should be renamed to hcl
     terraform = ":mock_terraform-fmt.sh",
+    xml = ":mock_prettier.sh",
     yaml = ":mock_yamlfmt.sh",
 )
